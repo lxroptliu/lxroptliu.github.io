@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>软斯箜 · ruansik</title>
+  <!-- Font Awesome 6 (免费图标库，包含哔哩哔哩、GitHub品牌图标) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ========= 绿蓝渐变色主题 · 字体美学优化 ========= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      /* 深邃绿蓝渐变背景：墨绿→深海 */
+      background: linear-gradient(145deg, #0a2b26 0%, #052034 100%);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.5;
+      color: #eef7f2;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    /* 卡片 — 半透明叠加绿蓝渐变，高级通透感 */
+    .card {
+      max-width: 640px;
+      width: 100%;
+      background: linear-gradient(135deg, rgba(28, 80, 70, 0.9) 0%, rgba(20, 65, 90, 0.95) 100%);
+      backdrop-filter: blur(2px);
+      border-radius: 40px;
+      padding: 3.2rem 2.8rem;
+      box-shadow: 0 25px 40px -10px rgba(0, 30, 25, 0.8), 0 0 0 1px rgba(80, 230, 200, 0.2) inset;
+      transition: all 0.25s ease;
+      text-align: center;
+      border: 1px solid rgba(90, 230, 190, 0.25);
+    }
+
+    /* 头像 — 碧波圆框 */
+    .avatar {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.6rem auto;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid #40dfb5;        /* 鲜活绿松石 */
+      background: #1c5548;
+      box-shadow: 0 8px 20px rgba(0, 100, 80, 0.5);
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .avatar:hover {
+      transform: scale(1.02);
+      border-color: #8cffe5;
+      box-shadow: 0 10px 28px rgba(0, 150, 120, 0.7);
+    }
+
+    .avatar img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      color: transparent;
+    }
+
+    /* 中文名 — 雅黑基调，略细字重，增加光感 */
+    .name-cn {
+      font-size: 3.5rem;
+      font-weight: 400;                 /* 保留适当重量，但更清透 */
+      letter-spacing: 3px;
+      margin: 0 0 0.15rem 0;
+      color: #ffffff;
+      line-height: 1.15;
+      text-shadow: 0 2px 10px rgba(0, 150, 130, 0.5);
+      font-family: 'SF Pro Display', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+
+    /* 英文名 — 细腻水波质感，更柔和 */
+    .name-en {
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: #c0f7f0;                  /* 极浅水绿 */
+      margin: 0 0 0.3rem 0;
+      letter-spacing: 2px;
+      word-break: break-word;
+      text-shadow: 0 1px 8px rgba(0, 80, 70, 0.6);
+      font-family: 'Inter', 'Segoe UI', 'Poppins', sans-serif;
+    }
+
+    /* 分割线 — 流光渐变条 */
+    .divider {
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, #3fe0b0, #40b0e0, #3fe0b0);
+      margin: 1.6rem auto 1.5rem auto;
+      border-radius: 4px;
+      opacity: 0.9;
+      box-shadow: 0 0 6px #3fe0b0;
+    }
+
+    /* 描述文字 — 温润如玉 */
+    .bio {
+      font-size: 1.3rem;
+      color: #e2fff5;                  /* 月白沾绿 */
+      margin: 0 0 2.2rem 0;
+      font-weight: 350;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 6px rgba(0, 40, 30, 0.4);
+      font-family: 'Inter', 'system-ui', 'Helvetica Neue', sans-serif;
+      font-style: normal;
+    }
+
+    /* 双按钮容器 — 并排优雅布局 */
+    .link-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      margin: 2rem 0 2rem 0;
+    }
+
+    /* 通用按钮样式 — 绿蓝渐变基底 */
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(125deg, #2fcb9a, #208ac0);
+      padding: 0.9rem 2rem;
+      border-radius: 60px;
+      text-decoration: none;
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 420;
+      border: none;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 18px rgba(0, 70, 60, 0.5), 0 1px 2px rgba(255, 255, 255, 0.3) inset;
+      letter-spacing: 0.6px;
+      min-width: 200px;
+      backdrop-filter: blur(2px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* 图标一律纯白，尺寸优雅 */
+    .social-link i {
+      font-size: 2rem;
+      color: white;
+      transition: transform 0.2s, filter 0.2s;
+    }
+
+    /* 悬停 更亮、微浮 */
+    .social-link:hover {
+      background: linear-gradient(125deg, #3fe0b0, #30a2da);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 26px rgba(0, 120, 100, 0.7), 0 1px 4px rgba(255, 255, 255, 0.4) inset;
+    }
+
+    .social-link:hover i {
+      transform: scale(1.06);
+      filter: drop-shadow(0 0 4px #befff0);
+    }
+
+    .social-link:active {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(0, 70, 55, 0.7);
+    }
+
+    /* GitHub 按钮可以稍微调整个性 (但沿用一致渐变, 也可微调, 这里保留统一风格) */
+    .github-link {
+      /* 可以微调颜色倾向, 但绿蓝主题里保持相近, 也可不同明度 */
+      background: linear-gradient(125deg, #269f89, #1d72a3);
+    }
+
+    /* 页脚 — 清澈 */
+    .footer {
+      font-size: 0.95rem;
+      color: #bee9e2;
+      margin-top: 2.6rem;
+      letter-spacing: 0.8px;
+      font-weight: 340;
+      border-top: 1px solid rgba(90, 210, 180, 0.35);
+      padding-top: 1.8rem;
+      font-family: 'Inter', 'SF Mono', monospace;
+    }
+
+    /* 移动端精致适配 */
+    @media (max-width: 550px) {
+      .card {
+        padding: 2.2rem 1.5rem;
+        border-radius: 32px;
+      }
+
+      .avatar {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 1.3rem;
+        border-width: 2px;
+      }
+
+      .name-cn {
+        font-size: 2.8rem;
+        letter-spacing: 2px;
+      }
+
+      .name-en {
+        font-size: 1.5rem;
+        letter-spacing: 1.2px;
+      }
+
+      .bio {
+        font-size: 1.15rem;
+        margin-bottom: 1.8rem;
+      }
+
+      .link-group {
+        flex-direction: column;
+        gap: 1rem;
+        margin: 1.5rem 0;
+      }
+
+      .social-link {
+        width: 100%;
+        padding: 0.9rem 1.5rem;
+        font-size: 1.25rem;
+        min-width: unset;
+      }
+
+      .social-link i {
+        font-size: 1.8rem;
+      }
+
+      .footer {
+        margin-top: 2rem;
+        padding-top: 1.4rem;
+      }
+    }
+
+    /* 焦点状态 */
+    .avatar:focus-within {
+      outline: 2px solid #6ff0d0;
+      outline-offset: 6px;
+    }
+
+    .social-link:focus-visible {
+      outline: 2px solid #a0ffda;
+      outline-offset: 4px;
+      background: linear-gradient(125deg, #1fba88, #197bb0);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- 头像 (保留占位图，您可自由替换) -->
+    <div class="avatar" aria-label="软斯箜头像">
+      <img src="https://image2url.com/r2/default/images/1772285636204-c514618d-ef33-4a6b-84f4-ea7406c9c16c.png" 
+           alt="软斯箜·头像" 
+           title="软斯箜 · Ruansik">
+    </div>
+
+    <!-- 姓名：字体更雅致 -->
+    <h1 class="name-cn">软斯箜</h1>
+    <p class="name-en">Ruansik</p>
+
+    <!-- 渐变分割线 -->
+    <div class="divider" role="presentation"></div>
+
+    <!-- 描述语：每个字都经过斟酌 -->
+    <p class="bio">让我们的网站，成为世界的一束光</p>
+
+    <!-- 双按钮容器：哔哩哔哩 + GitHub (您可自行替换链接) -->
+    <div class="link-group">
+      <!-- 哔哩哔哩按钮 -->
+      <a href="https://m.bilibili.com/space/1606715615" class="social-link" target="_blank" rel="noopener noreferrer" title="哔哩哔哩 · 软斯箜">
+        <i class="fab fa-bilibili"></i>
+        <span>哔哩哔哩</span>
+      </a>
+
+      <!-- GitHub 按钮 — 链接可自行替换，目前放置占位链接，您可修改为真实地址 -->
+      <a href="https://github.com/lxropt" class="social-link github-link" target="_blank" rel="noopener noreferrer" title="GitHub · ruansik">
+        <i class="fab fa-github"></i>
+        <span>GitHub</span>
+      </a>
+    </div>
+
+    <!-- 页脚版权 (绿蓝文字 · 轻柔) -->
+    <div class="footer">
+      © 2026 软斯箜 Ruansik
+    </div>
+  </div>
+  <!-- 没有任何多余脚本，极简轻量 -->
+</body>
+</html>
